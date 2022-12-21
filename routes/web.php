@@ -1,6 +1,16 @@
 <?php
 
+use App\Models\Quisioners;
+use App\Models\Daftar_keluhan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\biodataController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\ResultKeluhanController;
+use App\Http\Controllers\belumditanganiController;
+use App\Http\Controllers\sudahditanganiController;
+use App\Http\Controllers\ResultQuisionerController;
+use App\Models\ResultKeluhan;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +23,56 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+
+// Route::get('/login', function () {
+//     return view('pages.login');
+// });
+
+
+// Route::get('/admin/home', function () {
+//     return view('pages.admin/home');
+// });
+
+
+
+
+
+// Route::get('/register', function () {
+//     return view('pages.registrasi');
+// });
+
+
+
+Auth::routes();
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index']);
+    Route::resource('resultquisioner', ResultQuisionerController::class);
+    Route::resource('resultkeluhan', ResultKeluhanController::class);
+    Route::get('/quisioner', function () {
+        $angka = 1;
+        $dataPertanyaan = Quisioners::all();
+        $dataKeluhan = Daftar_keluhan::all();
+        $result_keluhan = ResultKeluhan::orderBy("created_at", "desc")->get();
+        $cs = "";
+        return view('pages.quisioner', compact('angka', 'dataPertanyaan', 'dataKeluhan','result_keluhan','cs'));
+    });
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/admin/home', function () {
+//     return view('pages.admin/home');
+// });
+
+Route::get('/admin/biodata', [biodataController::class, 'index']);
+
+// Route::get('/admin/sudahditangani', [sudahditanganiController::class, 'index']);
+// Route::get('/admin/belumditangani', [belumditanganiController::class, 'index']);
+Route::get('/admin/laporan', [LaporanController::class, 'index']);
