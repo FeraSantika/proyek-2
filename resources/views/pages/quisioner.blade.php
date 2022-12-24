@@ -72,15 +72,16 @@
             </div>
 
             <!-- QUESTION SECTION -->
-            <div class="p-2  xxs:w-96  ">
+            <div class="p-2  xxs:w-96  my-4"  >
                 <form id="form-pengetahuan" action="{{ route('resultquisioner.store') }}" method="POST">
                     @csrf
 
 
                     @foreach ($dataPertanyaan as $value )
                     <div id="{{ $value->id }}" style="display: none;">
-                        <div class="flex justify-center py-20">
-                            <h1 id="q-list" class="text-center text-2xl">{{ $value->pertanyaan }}</h1>
+                        {{-- menghilangkan py-20 u/ merapihkan halaman --}}
+                        <div class="flex justify-center ">
+                            <h1 id="q-list" style="margin-bottom: 20px" class="text-center text-2xl">{{ $value->pertanyaan }}</h1>
                         </div>
                         <input style="display: none;" type="text" name="user_id" value="{{ Auth::user()->id }}">
                         <input style="display: none;" type="text" name="nik" value="{{ Auth::user()->nik }}">
@@ -106,7 +107,8 @@
                     </div>
                     @endforeach
                     <div id="11" style="display: none;" class="table-responsive" >
-                        <div style="margin-top:100px">
+                        {{-- mengubah margin-top 50% u/ merapihkan tampilan layar --}}
+                        <div style="margin-top:50px">
                             <h2 class="mb-4">Centang keluhan yang ada alami dibawah ini:</h2>
                         <input style="display: none;" type="text" name="user_id" value="{{ Auth::user()->id }}">
 

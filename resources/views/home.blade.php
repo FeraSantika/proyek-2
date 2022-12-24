@@ -34,7 +34,8 @@
                         </li>
 
                         @if (Auth::user()->can('read_puskesmas'))
-                        <li>
+                        
+                        <li id='link-admin'>
                             <a href="admin" class="nav-link text-white">
                                 <svg class="bi me-2" width="16" height="16">
                                     <use xlink:href="#speedometer2"></use>
@@ -42,6 +43,7 @@
                                 Admin
                             </a>
                         </li>
+                        
                         @endif
                         @if (Auth::user()->can('read_user'))
                         <li>
@@ -51,7 +53,11 @@
                                 </svg>
                                 Super Admin
                             </a>
+                            <script>
+                                document.getElementById('link-admin').style.display = 'none';
+                            </script>
                         </li>
+                        
                         @endif
 
                     </ul>

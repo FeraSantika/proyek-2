@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
 // Route::get('/admin/home', function () {
 //     return view('pages.admin/home');
@@ -76,3 +76,7 @@ Route::get('/admin/biodata', [biodataController::class, 'index']);
 // Route::get('/admin/sudahditangani', [sudahditanganiController::class, 'index']);
 // Route::get('/admin/belumditangani', [belumditanganiController::class, 'index']);
 Route::get('/admin/laporan', [LaporanController::class, 'index']);
+
+Auth::routes([
+    'verify' =>true
+]);
